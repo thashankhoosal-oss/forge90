@@ -1,0 +1,194 @@
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+<!-- ========== ONBOARDING SCREEN ========== -->
+<div id="screen-onboarding" class="screen active">
+  <div class="onboard-wrap">
+    <div class="onboard-brand">
+      <span class="brand-icon">⚡</span>
+      <h1 class="brand-title">FORGE<span class="accent">90</span></h1>
+      <p class="brand-sub">Your personalised 90-day transformation starts here.</p>
+    </div>
+
+    <div class="card form-card">
+      <div class="steps">
+        <div class="step active" id="step-dot-1"><span>1</span></div>
+        <div class="step-line"></div>
+        <div class="step" id="step-dot-2"><span>2</span></div>
+        <div class="step-line"></div>
+        <div class="step" id="step-dot-3"><span>3</span></div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="form-step active" id="step-1">
+        <h2 class="step-title">Your Stats</h2>
+        <p class="step-desc">Tell us about yourself so we can calibrate your plan.</p>
+        <div class="unit-toggle-row">
+          <span class="unit-label">Units:</span>
+          <div class="unit-toggle">
+            <button class="unit-btn active" id="btn-metric" onclick="setUnits('metric')">Metric</button>
+            <button class="unit-btn" id="btn-imperial" onclick="setUnits('imperial')">Imperial</button>
+          </div>
+        </div>
+        <div class="field-row" id="height-metric">
+          <div class="field">
+            <label>Height (cm)</label>
+            <input type="number" id="height-cm" placeholder="e.g. 175" min="100" max="250"/>
+          </div>
+        </div>
+        <div class="field-row hidden" id="height-imperial">
+          <div class="field half">
+            <label>Feet</label>
+            <input type="number" id="height-ft" placeholder="5" min="3" max="8"/>
+          </div>
+          <div class="field half">
+            <label>Inches</label>
+            <input type="number" id="height-in" placeholder="9" min="0" max="11"/>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field" id="weight-metric-wrap">
+            <label>Weight (kg)</label>
+            <input type="number" id="weight-kg" placeholder="e.g. 75" min="30" max="300"/>
+          </div>
+          <div class="field hidden" id="weight-imperial-wrap">
+            <label>Weight (lbs)</label>
+            <input type="number" id="weight-lbs" placeholder="e.g. 165" min="66" max="660"/>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field half">
+            <label>Age</label>
+            <input type="number" id="user-age" placeholder="e.g. 28" min="14" max="90"/>
+          </div>
+          <div class="field half">
+            <label>Sex</label>
+            <select id="user-sex">
+              <option value="">Select…</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-next" onclick="goStep(2)">Continue →</button>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="form-step" id="step-2">
+        <h2 class="step-title">Your Goal</h2>
+        <p class="step-desc">What are you training for? Pick one.</p>
+        <div class="goal-cards">
+          <div class="goal-card" data-goal="weight-loss" onclick="selectGoal(this)">
+            <div class="goal-icon">🔥</div>
+            <div class="goal-name">Weight Loss</div>
+            <div class="goal-desc">Burn fat, improve cardio, lean out.</div>
+          </div>
+          <div class="goal-card" data-goal="build-muscle" onclick="selectGoal(this)">
+            <div class="goal-icon">💪</div>
+            <div class="goal-name">Build Muscle</div>
+            <div class="goal-desc">Progressive overload, size & strength.</div>
+          </div>
+          <div class="goal-card" data-goal="get-fit" onclick="selectGoal(this)">
+            <div class="goal-icon">⚡</div>
+            <div class="goal-name">Get Fit</div>
+            <div class="goal-desc">Endurance, mobility & overall fitness.</div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="goStep(1)">← Back</button>
+          <button class="btn-next" onclick="goStep(3)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="form-step" id="step-3">
+        <h2 class="step-title">Your Arena</h2>
+        <p class="step-desc">Where will you be training?</p>
+        <div class="location-cards">
+          <div class="location-card" data-loc="home" onclick="selectLocation(this)">
+            <div class="loc-icon">🏠</div>
+            <div class="loc-name">Home</div>
+            <div class="loc-desc">No equipment needed. Bodyweight & minimal gear.</div>
+          </div>
+          <div class="location-card" data-loc="gym" onclick="selectLocation(this)">
+            <div class="loc-icon">🏋️</div>
+            <div class="loc-name">Gym</div>
+            <div class="loc-desc">Full equipment access. Barbells, machines & cables.</div>
+          </div>
+        </div>
+        <div class="field-row" style="margin-top:20px">
+          <div class="field">
+            <label>Experience Level</label>
+            <select id="user-level">
+              <option value="beginner">Beginner (0–1 years)</option>
+              <option value="intermediate" selected>Intermediate (1–3 years)</option>
+              <option value="advanced">Advanced (3+ years)</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="goStep(2)">← Back</button>
+          <button class="btn-generate" onclick="generatePlan()">⚡ Generate My 90-Day Plan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== DASHBOARD SCREEN ========== -->
+<div id="screen-dashboard" class="screen">
+  <nav class="dash-nav">
+    <div class="nav-brand">⚡ FORGE<span class="accent">90</span></div>
+    <div class="nav-right">
+      <div class="overall-progress-pill">
+        <span id="nav-progress-text">0/90 days</span>
+        <div class="pill-bar"><div class="pill-fill" id="nav-pill-fill"></div></div>
+      </div>
+      <button class="btn-reset" onclick="resetAll()">↩ Reset</button>
+    </div>
+  </nav>
+
+  <div class="stats-banner">
+    <div class="stat-chip" id="chip-goal"></div>
+    <div class="stat-chip" id="chip-location"></div>
+    <div class="stat-chip" id="chip-height"></div>
+    <div class="stat-chip" id="chip-weight"></div>
+    <div class="stat-chip" id="chip-level"></div>
+  </div>
+
+  <div class="phases-row">
+    <div class="phase-block">
+      <div class="phase-label">Phase 1 · Foundation</div>
+      <div class="phase-days">Days 1–30</div>
+      <div class="phase-bar"><div class="phase-fill" id="phase-fill-0"></div></div>
+    </div>
+    <div class="phase-block">
+      <div class="phase-label">Phase 2 · Intensity</div>
+      <div class="phase-days">Days 31–60</div>
+      <div class="phase-bar"><div class="phase-fill" id="phase-fill-1"></div></div>
+    </div>
+    <div class="phase-block">
+      <div class="phase-label">Phase 3 · Peak</div>
+      <div class="phase-days">Days 61–90</div>
+      <div class="phase-bar"><div class="phase-fill" id="phase-fill-2"></div></div>
+    </div>
+  </div>
+
+  <div class="planner-section">
+    <div class="week-tabs" id="week-tabs"></div>
+    <div class="day-grid" id="day-grid"></div>
+  </div>
+
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close" onclick="closeModal(null)">✕</button>
+      <div class="modal-header">
+        <div class="modal-day-num" id="modal-day-num"></div>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <div class="modal-tags" id="modal-tags"></div>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <button class="btn-complete" id="btn-complete" onclick="toggleComplete()">✓ Mark as Complete</button>
+    </div>
+  </div>
+</div>
